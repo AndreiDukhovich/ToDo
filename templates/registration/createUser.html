@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %} Регистрация пользователя {% endblock %}
+{% block content %}
+<div class='position registration'>
+<h1>Регистрация </h1>
+<form method="post" class="user">
+  {% csrf_token %}
+  {% for f in form %}
+  <label>{{ f.label }}</label>
+  <p>{{ f }}</p>
+  {% if f.help_text %}
+  <ul>
+    {% for mass in f.help_text %}
+    <li>{{ mass }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if f.errors %}
+  <span>{{ f.errors }}</span>
+  {% endif %}
+  {% endfor %}
+  <button type="submit">Регистрация</button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title%}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'style.css'%}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="{% static 'script.js'%}"></script>
+  {% block head%}{% endblock %}
+</head>
+<body>
+  <header>
+    <p><a href="{% url 'main' %}">ToDo</a></p>
+    {% if not user.is_authenticated %}
+      <p><a href="{% url 'login' %}">Войди</a> или <a href="{% url 'registration' %}">зарегистрируйся</a></p>
+    </header>
+    {% else %}
+      <p>Привет, {{ user.first_name }}. <a href="{% url 'logout' %}">Выйти</a></p>
+    {% endif %}
+  </header>
+<div class='main' id='main'>
+  {% if user.is_authenticated %}
+  <div class='navigation'>
+    <a href="{% url 'add_action' %}">Создай задачу</a>
+    <div class='dayTask'>
+      <a href="{% url 'today' %}">Сегодня</a>
+      <a href="{% url 'tomorrow' %}">Завтра</a>
+      <a href="{% url 'important' %}">Важные</a>
+      <a href="{% url 'tasks_list' %}">Все задачи</a>
+    </div>
+    <div class='topic'>
+      {% for topic in topics %}
+        {% if topicDict|get_item:topic %}
+          <div>
+            <span class='targFlip'>{{topic}} ({{topicDict|get_item:topic|length}})<img class='arrow' src="{% static 'arrow.png'%}"></span>
+            {% for i in topicDict|get_item:topic %}
+              <div class='taskNav secondFlip'><a href="{% url 'info' i.title%}">{{ i.title }}</a></div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class='empty'>{{topic}}</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  <div class='cont position'>
+  {% block content%}
+  {% endblock %}
+  </div>
+</div>
+
+</body>
+</html>

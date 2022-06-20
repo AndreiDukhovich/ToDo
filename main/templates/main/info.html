@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{% block title%}Подробнее{% endblock %}
+{% block content%}
+<div class='info position'>
+    <h1>{{info.title}}</h1>
+    <p>{{info.discription}}</p>
+    {% if info.date %}
+        <p>{{info.date}}</p>
+    {% endif %}
+    <p>{% if info.complete %}
+        Выполнено
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <button id='postForm' type="submit">Сделано</button>
+        </form>
+    {% endif %}
+    </p>    
+</div> 
+{% endblock %}
