@@ -64,7 +64,7 @@ def registration(request):
             form.save()
             user = authenticate(username=u_name,
                                 password=u_pass)
-            login(request, user) # Seems to do nothing
+            login(request, user)
             return redirect('main')
     form = RegistrationUser()
     data = {'form': form}
