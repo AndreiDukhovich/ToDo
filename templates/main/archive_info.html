@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title%}Подробнее{% endblock %}
+{% block content%}
+<div class='info position'>
+    <h1>{{info.title}}</h1>
+    <p>{{info.discription}}</p>
+    {% if info.date %}
+        <p>{{info.date}}</p>
+    {% endif %}
+    {% if info.time %}
+        <p>{{info.time}}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <button name='del' type="submit">Удалить</button>
+        <button name='res' type="submit">Востановить</button>
+    </form>
+    </p>    
+</div> 
+<script src="{% static 'storage.js'%}"></script>
+{% endblock %}

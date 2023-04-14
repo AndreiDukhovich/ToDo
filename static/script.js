@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("span").click(function(){
+    $(".targFlip").click(function(){
       $(this).siblings().slideToggle();
      });
   }); 

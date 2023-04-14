@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title%}Создание задачи{% endblock %}
+{% block head%}<link rel="stylesheet" href="{% static 'calendareStyle.css'%}">{% endblock %}
+{% block content%}
+<div id='cal' class='calendar'>
+    <p id="data"></p>
+    <table id="calendar"></table>
+    <div class="buttons">
+        <button class='button' onclick="before()">Предыдущий</button>
+        <button class='button' onclick="next()">Следующий</button>
+    </div>
+</div>
+<div id='form' class='form position'>
+    <form method="post">
+        {% csrf_token %}
+        <h1>Выберете дату</h1>
+        <p>{{ form.date }}</p>
+        <button type="submit">Показать задачи</button>
+    </form>
+<script src="{% static 'calendar.js'%}"></script>
+<script src="{% static 'clock.js'%}"></script>
+{% endblock %}

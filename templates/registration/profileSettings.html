@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title%}Настройки профиля{% endblock %}
+{% block head%}<link rel="stylesheet" href="{% static 'calendareStyle.css'%}">{% endblock %}
+{% block content %}
+<div id='clock' class='clock' onclick='getTime(event, time, countTime, selectLi)'>
+    <ul id='hours' class='clockValue'></ul>
+    <ul id='minutes' class='clockValue'></ul>
+</div>
+<div class="position">
+<h1>Настройки профиля</h1>
+<div>
+    <h3>Личная информация</h3>
+    <p>{{ person_info.first_name}} {{person_info.last_name}}</p>
+    <h4>Почта</h4>
+    <p>{{person_email}}</p>
+    <h4>Пароль</h4>
+    <p><a href="{% url 'password_change' %}">Изменить пароль</a></p>
+</div>
+<div class="form">
+<h3>Время ежедневного оповещения</h3>
+<form method="post">
+    {% csrf_token %}
+    <p>{{ form.time }}</p>
+    <button type="submit" name='dailyAlertTime'>Установить время</button>
+    <p>{{ error }}</p>
+</div>
+</div>
+<script src="{% static 'clock.js'%}"></script>
+{% endblock %}

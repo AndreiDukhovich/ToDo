@@ -5,6 +5,7 @@
 <h1>Регистрация </h1>
 <form method="post" class="user">
   {% csrf_token %}
+  {{ form.non_field_errors }}
   {% for f in form %}
   <label>{{ f.label }}</label>
   <p>{{ f }}</p>
@@ -21,5 +22,6 @@
   {% endfor %}
   <button type="submit">Регистрация</button>
 </form>
+{{ er }}
 </div>
 {% endblock %}
