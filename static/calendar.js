@@ -13,7 +13,7 @@ function createCalendar(elem, year, month) {
     table += `<td class='excessDay' onclick='before()'>${dE.getDate()-i}</td>`;
   }
   while (d.getMonth() == mon) {
-    table += `<td id='day'>${d.getDate()}</td>`;
+    table += `<td class='dayInCalendare' onclick='setDate(this.innerHTML)'>${d.getDate()}</td>`;
     if (getDay(d) % 7 == 6) {
       table += '</tr><tr>';
     }
@@ -56,14 +56,13 @@ function getDay(date) {
     return day - 1;
 }
 
-createCalendar(calendar, year, month);
-
 function next() {
     month +=1;
     if (month > 11) {
         month = 0;
         year +=1;
     }
+
   createCalendar(calendar,year, month);
 }
 
@@ -78,6 +77,8 @@ function before() {
 
 let cal = document.getElementById('cal');
 let dateField = document.getElementById('dateField');
+let notCalTimeElem = Array.from(calendar.childNodes);
+notCalTimeElem.push(dateField);
 
 let currentElem = null;
 
@@ -101,77 +102,22 @@ cal.onmouseout = function(event) {
   currentElem = null;
 }
 
-cal.onclick = function(event) {
-  if (event.target.id != 'day' ) return;
-  dateField.value = `${addNull(event.target.innerHTML)}.${addNull(month+1)}.${year}`;
+setDate = function(day) {
+  dateField.value = `${addNull(day)}.${addNull(month+1)}.${year}`;
   cal.style.display='none';
-};
+}
 
-dateField.onclick=function(event) {
+let closeDate = function(event) {
+  if (!(cal.contains(event.target) || event.target === dateField)) {
+  cal.style.display='none';
+  document.removeEventListener('mousedown', closeDate)
+  }
+}
+
+dateField.onclick = function(event) {
+  createCalendar(calendar, year, month);
   cal.style.display='block';
   cal.style.top=dateField.getBoundingClientRect().bottom+'px';
   cal.style.left=dateField.getBoundingClientRect().left-(cal.offsetWidth/2-dateField.offsetWidth/2)+'px';
-}
-
-document.onclick = function(event) {
-  if (event.target.id == 'main') {
-  cal.style.display='none';
-  clock.style.display='none';
-  }
-}
-
-function createClock() {
-  let hours = document.getElementById('hours');
-  let hoursHtml = '';
-  let minutes = document.getElementById('minutes');
-  let minutesHtml = '';
-  for (let i=0; i <= 23; i++) {
-    hoursHtml += "<li id='hours' style='scroll-snap-align: start'>"+addNull(i)+'</li>';
-  }
-  for (let i=0; i < 60; i++) {
-    minutesHtml += "<li id='minutes' style='scroll-snap-align: start'>"+addNull(i)+'</li>';
-  }
-  hours.innerHTML = hoursHtml;
-  minutes.innerHTML = minutesHtml;
-}
-createClock();
-let clockField = document.getElementById('timeField');
-let clock = document.getElementById('clock')
-
-clockField.onclick=function(event) {
-  clock.style.display='flex';
-  clock.style.top=clockField.getBoundingClientRect().bottom+'px';
-  clock.style.left=clockField.getBoundingClientRect().left-(clock.offsetWidth/2-clockField.offsetWidth/2)+'px';
-}
-let time = ['00', '00']
-let hourLi, minuteLi;
-clock.onclick = function(event) {
-  let target = event.target;
-  if (event.target.id == 'hours') {
-    setHour(time, target)
-  }
-  if (event.target.id == 'minutes') {
-    setMinute(time, target)
-  }
-  clockField.value = time.join(':');
-}
-
-function setHour(time, target) {
-  if (hourLi) {
-    hourLi.style = '';
-  }
-  hourLi = target;
-  hourLi.style = 'background-color: rgba(241, 241, 241, 0.627)';
-  time[0] = hourLi.innerHTML;
-}
-function setMinute(time, target) {
-  if (minuteLi) {
-    minuteLi.style = '';
-  }
-  minuteLi = target;
-  minuteLi.style = 'background-color: rgba(241, 241, 241, 0.627)';
-  time[1] = minuteLi.innerHTML;
-}
-function setTime() {
-  clock.style.display='none';
+  document.addEventListener('mousedown', closeDate)
 }

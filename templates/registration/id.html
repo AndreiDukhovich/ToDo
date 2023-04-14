@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Начало{% endblock %}
+{% block content%}
+<div class="position">
+    {% if user.is_authenticated %}
+     <p>{{ message }}</p>
+    {% else %}
+     <p>Вы не авторизировались. <a href="{% url 'loginid' id%}">Войди</a> или <a href="{% url 'registration' id %}">зарегистрируйся</a>.</p>
+     {% endif %}
+</div>
+{% endblock %}

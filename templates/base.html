@@ -4,30 +4,36 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title%}{% endblock %}</title>
+  {% block head%}{% endblock %}
   <link rel="stylesheet" href="{% static 'style.css'%}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="{% static 'script.js'%}"></script>
-  {% block head%}{% endblock %}
+ 
 </head>
 <body>
-  <header>
+  <div class="header">
+    <div class="header_content">
     <p><a href="{% url 'main' %}">ToDo</a></p>
     {% if not user.is_authenticated %}
       <p><a href="{% url 'login' %}">Войди</a> или <a href="{% url 'registration' %}">зарегистрируйся</a></p>
     </header>
     {% else %}
-      <p>Привет, {{ user.first_name }}. <a href="{% url 'logout' %}">Выйти</a></p>
+      <p>Привет, <a href="{% url 'profile' %}">{{ user.first_name }}.</a> <a href="{% url 'logout' %}">Выйти</a></p>
     {% endif %}
-  </header>
+  </div>
+  </div>
 <div class='main' id='main'>
   {% if user.is_authenticated %}
   <div class='navigation'>
     <a href="{% url 'add_action' %}">Создай задачу</a>
+    <a href="{% url 'profile' %}">Профиль</a>
     <div class='dayTask'>
-      <a href="{% url 'today' %}">Сегодня</a>
-      <a href="{% url 'tomorrow' %}">Завтра</a>
-      <a href="{% url 'important' %}">Важные</a>
+      <a href="{% url 'task_list_with_param' filter_param='today' %}">Сегодня</a>
+      <a href="{% url 'task_list_with_param' filter_param='tomorrow' %}">Завтра</a>
+      <a href="{% url 'task_list_with_param' filter_param='important' %}">Важные</a>
+      <a href="{% url 'taks_for_date' %}">Задачи по дням</a>
       <a href="{% url 'tasks_list' %}">Все задачи</a>
+      <a href="{% url 'task_list_with_param' filter_param='archive' %}">Архив</a>
     </div>
     <div class='topic'>
       {% for topic in topics %}
@@ -35,7 +41,7 @@
           <div>
             <span class='targFlip'>{{topic}} ({{topicDict|get_item:topic|length}})<img class='arrow' src="{% static 'arrow.png'%}"></span>
             {% for i in topicDict|get_item:topic %}
-              <div class='taskNav secondFlip'><a href="{% url 'info' i.title%}">{{ i.title }}</a></div>
+              <div class='taskNav secondFlip'><a href="{% url 'info' i.id%}">{{ i.title }}</a></div>
             {% endfor %}
           </div>
         {% else %}
@@ -45,7 +51,7 @@
     </div>
   </div>
   {% endif %}
-  <div class='cont position'>
+  <div class='cont'>
   {% block content%}
   {% endblock %}
   </div>

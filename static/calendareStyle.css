@@ -1,0 +1,80 @@
+.calendar {
+    display: none;
+    position: absolute;
+    font-size: 20px;
+    text-align: center;
+    background-color: rgb(226, 226, 226);
+    border-radius: 5px;
+}
+.calendar p {
+    margin: 0 auto;
+}
+#calendar {
+    margin: 0 auto;
+    height: 150px;   
+}
+td {   
+    text-align: center;
+    user-select: none;
+}
+.tdHover {   
+    text-align: center;
+    user-select: none;
+    background-color: rgba(241, 241, 241, 0.627);
+}
+th {
+    user-select: none;
+    max-height: 30px;
+    width: 30px;
+    text-align: center;
+}
+tr {
+    min-height: 100px;
+    width: 25px;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+.button {
+    height: 20px;
+    margin-left: 2px;
+    margin-right: 10px;
+    background-color: rgb(226, 226, 226);
+    border: 0;
+
+}
+.excessDay {
+    color:rgb(191, 191, 191)
+}
+
+
+
+.clock {
+    padding: 5px 0;
+    position: absolute;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 180px;
+    height: 200px;
+    background-color: rgb(226, 226, 226);
+    border-radius: 5px;
+}
+
+.clockValue {
+    font-size: 50px;
+    width: 75px;
+    height: 180px;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    cursor: pointer;
+    text-align: center;
+}
+.clockValue::-webkit-scrollbar {
+    width: 0;
+  }

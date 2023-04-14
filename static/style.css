@@ -1,21 +1,30 @@
 body {
     margin: 0;
-    /*overflow: hidden;*/
     font-size: 25px;
 }
-header {
+
+table {
+    width: 100%;
+}
+.header {
     position: fixed;
     width: 100%;
     height: 50px;
     top: 0;
     left: 0;
     background-color: rgb(255, 102, 0);
+}
+
+.header_content {
+    margin: 0 5px;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-header p {
+
+.header_content p {
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -30,6 +39,7 @@ ul {
 }
 h1 {
     font-size: 50px;
+    margin-bottom: 10px;
 }
 .notLogIn {
     margin-top: 50px;
@@ -43,6 +53,7 @@ h1 {
 .navigation {
     width: 15%;
     min-height: 100vh;
+    padding-right:  10px;
     padding-left: 10px;
     background-color: rgb(226, 226, 226);    
 }
@@ -54,9 +65,12 @@ h1 {
     display: block;
 }
 .cont {
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     
 }
+
 .taskNav {
     display: none;
 }
@@ -72,6 +86,7 @@ h1 {
     height: 10px;
 }
 .position {
+    width: 100%;
     text-align: center;
 }
 .registration {
@@ -82,85 +97,121 @@ h1 {
     margin: 5px auto;
 }
 
+.add_del_bootle {
+    width: 150px;
+}
 
+.action_on_list {
+    width: 100%;
+    text-align: left;
+}
 
-
-
-
-.calendar {
-    display: none;
-    position: absolute;
-    font-size: 20px;
-    text-align: center;
-    background-color: rgb(226, 226, 226);
-}
-.calendar p {
-    margin: 0 auto;
-}
-#calendar {
-    margin: 0 auto;
-    height: 150px;   
-}
-td {   
-    text-align: center;
-    user-select: none;
-}
-.tdHover {   
-    text-align: center;
-    user-select: none;
-    background-color: rgba(241, 241, 241, 0.627);
-}
-th {
-    user-select: none;
-    max-height: 30px;
-    width: 30px;
-    text-align: center;
-}
-tr {
-    min-height: 100px;
-    width: 25px;
-}
-.buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    padding-bottom: 10px;
-}
-.button {
+.add_del_bootle {
+    width: 20px;
     height: 20px;
-    margin-left: 2px;
-    margin-right: 10px;
-    background-color: rgb(226, 226, 226);
-    border: 0;
-
-}
-.excessDay {
-    color:rgb(191, 191, 191)
+    margin: 0;
 }
 
-
-
-.clock {
-    padding: 5px 0;
-    position: absolute;
+.del_rest {
     display: none;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 180px;
-    height: 200px;
-    background-color: rgb(226, 226, 226);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: 0;
+    background-color: rgb(223, 223, 223);
+}
+.del_rest:hover { 
+    background-color: rgb(201, 201, 201);
 }
 
-.clockValue {
-    font-size: 50px;
-    width: 75px;
-    height: 180px;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    cursor: pointer;
-    text-align: center;
+.table_list {
+    width: calc(100% - 20px);
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 5px;
+    padding-bottom: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
-.clockValue::-webkit-scrollbar {
-    width: 0;
-  }
+
+.centered_tr {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    padding: 10px 10px;
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.centered_tr td {
+    width: 45%;
+}
+
+.check_td {
+   width: max-content !important;
+   padding: 0;
+}
+
+.checkbox_order {
+    margin: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.main_checkbox {
+    margin: 0;
+    width: 20px;
+    height: 20px;
+}
+
+
+.edit_form {
+    width: 30%;
+}
+
+
+
+.flip {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.main_flip {
+    padding-bottom: 5px;
+    cursor: pointer;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.up {
+    margin-top: auto;
+    margin-bottom: auto;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid rgb(0, 0, 0);
+    }
+
+.down {
+    margin-top: auto;
+    margin-bottom: auto;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid rgb(0, 0, 0);
+    }
+
+.flipForm {
+    width: 100%;
+    display: block;
+    margin: 5px auto;
+}
+
+.flipText {
+    text-align: center;
+    width: 100%;
+}
+
+.title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 30px;
+    font-weight: 600;
+}

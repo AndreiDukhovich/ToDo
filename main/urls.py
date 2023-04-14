@@ -1,17 +1,14 @@
 from django.urls import path, include
-from django.views import View
 from . import views
 
 urlpatterns = [
     path('', views.main, name='main'),
     path('add_action', views.add_action, name='add_action'),
-    path('xui', views.hui, name='xui'),
-    path('task/today', views.today, name='today'),
-    path('task/tomorrow', views.tomorrow, name='tomorrow'),
-    path('task/important', views.important, name='important'),
-    path('task/list', views.tasks_list, name='tasks_list'),
-    path('task/<str:title>', views.info_task, name='info'),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('account/registration', views.registration, name='registration'),
-    
+    path('tasks/', views.tasks_list, name='tasks_list'),
+    path('task/<str:date>/', views.tasks_list, name='task_list_with_date'),
+    path('tasks/<str:filter_param>/', views.tasks_list, name='task_list_with_param'),
+    path('edit/<int:loc>/<int:id>', views.edit, name='edit'),
+    path('archive/<int:id>', views.info_archive_task, name='archiveinfo'),
+    path('task/<int:id>', views.info_task, name='info'),
+    path('datetasks', views.task_for_date, name='taks_for_date'),
 ]

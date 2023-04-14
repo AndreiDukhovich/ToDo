@@ -133,3 +133,11 @@ dmypy.json
 
 #Database
 *.sqlite3
+
+.dockerignore
+Dockerfile
+fly.toml
+info
+Procfile
+requirements.txt
+

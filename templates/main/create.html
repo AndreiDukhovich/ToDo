@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title%}Создание задачи{% endblock %}
+{% block head%}<link rel="stylesheet" href="{% static 'calendareStyle.css'%}">{% endblock %}
+{% block content%}
+<div id='cal' class='calendar'>
+    <p id="data"></p>
+    <table id="calendar"></table>
+    <div class="buttons">
+        <button class='button' onclick="before()">Предыдущий</button>
+        <button class='button' onclick="next()">Следующий</button>
+    </div>
+</div>
+<div id='clock' class='clock' onclick='getTime(event, time, countTime, selectLi)'>
+    <ul id='hours' class='clockValue'></ul>
+    <ul id='minutes' class='clockValue'></ul>
+</div>
+<div id='form' class='form position'>
+    <form method="post">
+        {% csrf_token %}
+        <p>{{ main_form.topic }}</p>
+        <p>{{ main_form.title }}</p>
+        <p>{{ main_form.discription }}</p>
+        <p>{{ main_form.important }} Важная задача</p>
+        <p class="title">Выберете тип задачи:</p>
+        <div id='datetime'  class='main_flip'>
+            <div class='flip'><span class="flipText">Задача по дате и времени</span><span class='up'></span></div>
+            <div style='display: none;' class='flip_form'>
+                {{ main_form.date }}
+                {{ main_form.time }}
+            </div>
+        </div>
+        <div id='onlydate' class='main_flip'>
+            <div class='flip'><span class="flipText">Задача только по дате</span><span class='up'></span></div>
+            <div style='display: none;' class='flip_form'>
+            </div>
+        </div>
+        <div id='onlytime' class='main_flip'>
+            <div class='flip'><span class="flipText">Переодичная задача</span><span class='up'></span></div>
+            <div style='display: none;' class='flip_form''>
+                {{ main_form.period }}
+            </div>
+        </div>
+        <p id="error" style="display: none;"></p>
+        <button id='button' type="submit">Отправить</button>
+    </form>
+<script src="{% static 'calendar.js'%}"></script>
+<script src="{% static 'clock.js'%}"></script>
+<script src="{% static 'flipTypeTask.js'%}"></script>
+{% endblock %}
