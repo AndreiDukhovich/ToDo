@@ -6,8 +6,11 @@
 <p>Добро пожаловать на сайт, где ты можешь планировать свои задачи на дни вперед.</p>
 {% if not user.is_authenticated %}
 <p>Для этого <a href="{% url 'login' %}">войди</a> или <a href="{% url 'registration' %}">зарегистрируйся</a>.</p>
+<<<<<<< HEAD
 {% else %}
 <p>Советуем воспользоваться <a href="https://t.me/ToDoaBot">нашим ботом.</a></p>
+=======
+>>>>>>> bda35762a4f59c6ac1a2c84b2f7493d6f0a6c63a
 {% endif %}
 </div>
 {% endblock %}
